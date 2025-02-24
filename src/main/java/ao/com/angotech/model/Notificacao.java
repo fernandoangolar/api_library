@@ -27,9 +27,6 @@ public class Notificacao {
     @Column(nullable = false)
     private String mensagem;
 
-    @Column(nullable = false)
-    private Boolean lida = false;
-
     @Column(nullable = false, name = "data_envio")
     private LocalDateTime dataEnvio;
 }

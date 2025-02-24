@@ -48,7 +48,6 @@ CREATE TABLE notificacoes (
     id SERIAL PRIMARY KEY,
     usuario_id BIGINT NOT NULL,
     mensagem TEXT NOT NULL,
-    lida BOOLEAN DEFAULT FALSE,
     data_envio TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
 );
