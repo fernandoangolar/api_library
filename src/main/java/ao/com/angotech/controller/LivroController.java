@@ -2,6 +2,7 @@ package ao.com.angotech.controller;
 
 import ao.com.angotech.dto.LivroCreateDTO;
 import ao.com.angotech.dto.LivroResponseDTO;
+import ao.com.angotech.dto.LivroUpdateDTO;
 import ao.com.angotech.service.LivroService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class LivroController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<LivroResponseDTO> getLivro(@PathVariable Long id) {
+    public ResponseEntity<LivroResponseDTO> get(@PathVariable Long id) {
 
         LivroResponseDTO livro = livroService.buscarLivro(id);
 
@@ -47,5 +48,12 @@ public class LivroController {
 
         Page<LivroResponseDTO> livros = livroService.buscarTodosOsLivros(titulo, autor, page, size, sortBy, direction);
         return ResponseEntity.ok(livros);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<LivroResponseDTO> atualizar(@PathVariable Long id, @Valid @RequestBody LivroUpdateDTO dto) {
+
+        LivroResponseDTO responseDTO = livroService.atualizarLivros(id, dto);
+        return ResponseEntity.ok(responseDTO);
     }
 }

@@ -54,7 +54,20 @@ public class LivroServiceImpl implements LivroService {
 
     @Override
     public LivroResponseDTO atualizarLivros(Long id, LivroUpdateDTO dto) {
-        return null;
+
+        Livro livro = livroRespository.findById(id)
+                .orElseThrow( () -> new ResourceEntityNotFound("Livro com este id não encontrado") );
+
+        livro.setTitulo(dto.titulo());
+        livro.setAutor(dto.autor());
+        livro.setGenero(dto.genero());
+        livro.setEditora(dto.editora());
+        livro.setAnoPublicacao(dto.anoPublicacao());
+        livro.setQuantidadeDisponivel(dto.quantidadeDisponivel());
+
+        livroRespository.save(livro);
+        return LivroResponseDTO.fromEntity(livro);
+
     }
 
     @Override
